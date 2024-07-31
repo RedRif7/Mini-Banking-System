@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
+
+Route::get('/test', function () {
+    return view('test');
+});
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::get('/cryptos', [CryptosController::class,'index']);
 
@@ -25,7 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/update-currency', [ProfileController::class, 'updateCurrency'])->middleware('auth')->name('profile.updateCurrency');
-    Route::post('/profile/update-balance', [ProfileController::class, 'updateBalance'])->middleware('auth')->name('profile.updateBalance');
+    Route::post('/profile/update-balance', [ProfileController::class, 'updateBalance'])
+        ->name('profile.updateBalance');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

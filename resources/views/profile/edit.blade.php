@@ -7,8 +7,18 @@
         </div>
     </x-slot>
 
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-lg font-bold">Profile Information</h2>
+                <p><strong>Name:</strong> {{ Auth::user()->name }}</p>
+                <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                <p><strong>Balance:</strong> {{ number_format(Auth::user()->balance, 2) }}</p>
+                <p><strong>Current Currency:</strong> {{ Auth::user()->currency }}</p>
+                <p><strong>IBAN:</strong> {{ Auth::user()->iban }}</p>
+            </div>
+
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
             <h2 class="text-xl font-semibold mb-4">Balance</h2>
             <p class="text-2xl font-bold">{{$user->currency}} {{ number_format($user->balance, 2) }}</p>
@@ -20,7 +30,7 @@
                            class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                            placeholder="0.00">
                 </div>
-                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" class="dark:bg-black hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     Save
                 </button>
             </form>

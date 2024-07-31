@@ -8,17 +8,7 @@
     </head>
 
     <body class="bg-gray-100">
-    <div class="container mx-auto p-6">
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-xl font-semibold mb-4">Navigation</h2>
-            <div class="flex flex-col space-y-4">
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link class="text-[#233043]" href="/profile">Profile</x-nav-link>
-                    <x-nav-link class="text-[#233043]" href="/profile/transactions">Transactions</x-nav-link>
-                    <x-nav-link class="text-[#233043]" href="/profile/accounts">Accounts</x-nav-link>
-                </div>
-            </div>
-        </div>
+    <div class="container mx-auto pt-28">
         <!-- User Information Section -->
         <div class="bg-white shadow-md rounded-lg p-6 mb-6">
             <h1 class="text-2xl font-semibold mb-4">Welcome, {{ $user->name }}!</h1>

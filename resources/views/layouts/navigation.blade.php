@@ -34,9 +34,8 @@
                     </x-slot>
 
                     <x-slot name="content">
-
                         <x-dropdown-link>
-                            {{ __('Balance: ') }} {{ Auth::user()->currency }} {{ Auth::user()->balance }}
+                            {{ __('Balance: ') }} {{ Auth::user()->currency }} {{number_format(Auth::user()->balance , 2) }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('profile.edit')">

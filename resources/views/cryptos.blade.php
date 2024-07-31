@@ -57,11 +57,10 @@
         </div>
             <div class="w-1/2 bg-[#222d3d] shadow-xl rounded-lg ps-5 border border-gray-300" id="crypto-detail">
                 <div class="container mx-auto flex space-x-4 py-6">
-                <h2 class="text-xl text-[#b9c9b8] font-bold mb-4">Šeit būs detals par Crypto (on click with AJAX laikam...)</h2>
-                <!-- Crypto detail will be injected here via AJAX -->
-                <div id="crypto-info" class="text-blue-gray-900">
-                    <p class="text-gray-600">Select a crypto to see details</p>
-                </div>
+                    <h2 class="text-xl text-[#b9c9b8] font-bold mb-4">Šeit būs details par Crypto (on click with AJAX)</h2>
+                    <!-- Crypto detail will be injected here via AJAX -->
+                    <div id="crypto-info" class="text-blue-gray-900">
+                    </div>
                 </div>
             </div>
         </div>
