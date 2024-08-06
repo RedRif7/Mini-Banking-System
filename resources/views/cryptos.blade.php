@@ -48,24 +48,33 @@
                     <td class="py-3 px-4 ">{{$crypto['symbol']}}</td>
                     <td class="py-3 px-4 ">{{Auth::user()->currency }} {{number_format($crypto['price'],6)}}</td>
                     <td class="py-3 px-4 text-center">
-                        <a href="/cryptos/{{$crypto['symbol']}}" class="font-medium text-[#b9c9b8] hover:text-[#dc9a35]">Check</a>
+                        <form action="{{ route('cryptos.details') }}" method="GET">
+                            <input type="hidden" name="symbol" value="{{ $crypto['symbol'] }}">
+                            <button type="submit">Check</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
                 @endforeach
             </table>
         </div>
-            <div class="w-1/2 bg-[#222d3d] shadow-xl rounded-lg ps-5 border border-gray-300" id="crypto-detail">
-                <div class="container mx-auto flex space-x-4 py-6">
-                    <h2 class="text-xl text-[#b9c9b8] font-bold mb-4">Šeit būs details par Crypto (on click with AJAX)</h2>
-                    <!-- Crypto detail will be injected here via AJAX -->
-                    <div id="crypto-info" class="text-blue-gray-900">
+            <div class="w-1/2 bg-[#222d3d] shadow-xl rounded-lg ps-5 border border-gray-300 text-[#b9c9b8]">
+
+                @if(isset($selectedCrypto))
+                    <h2 class="text-lg font-bold mb-4 text-center p-6">Crypto Details</h2>
+                    <div id="crypto-details">
+                        <p><strong>IBAN:</strong> <span id="user-iban">{{ $user->iban }}</span></p>
+                        <p><strong>Symbol:</strong> <span id="crypto-symbol">{{ $selectedCrypto['symbol'] }}</span></p>
+                        <p><strong>Price:</strong> $<span id="crypto-price">{{ number_format($selectedCrypto['price'], 6) }}</span></p>
+                        <p><strong>Balance:</strong> $<span id="user-balance">{{ number_format($user->balance, 2) }}</span></p>
                     </div>
-                </div>
+                @else
+                    <p class="text-center text-[#b9c9b8] text-2xl p-32">No crypto selected. Please click "Check" to view details.</p>
+                @endif
             </div>
         </div>
     </section>
     <footer>
-        <h2 class="text-sm font-bold text-center mt-4 text-[#b9c9b8]">Coin data from CoinMarketAPI</h2>
+            <h2 class="text-sm font-bold text-center mt-4 text-[#b9c9b8]">Coin data from CoinMarketAPI</h2>
     </footer>
 </x-app-layout>

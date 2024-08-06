@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
-        $iban = $this->generateIban();
+
         $user = User::create([
             'name' => $request->name,
             'currency'=> $request->currency,

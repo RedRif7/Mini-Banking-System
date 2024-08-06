@@ -1,58 +1,56 @@
 <x-app-layout>
     <x-slot name="header" class="bg-[#233043]">
         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link class="text-[#233043]" href="/profile">Profile</x-nav-link>
-            <x-nav-link class="text-[#233043]" href="/profile/transactions">Transactions</x-nav-link>
-            <x-nav-link class="text-[#233043]" href="/profile/accounts">Accounts</x-nav-link>
+            <x-nav-link class="text-[#21324d]" href="/profile">Profile</x-nav-link>
+            <x-nav-link class="text-[#21324d]" href="/profile/transactions">Transactions</x-nav-link>
+            <x-nav-link class="text-[#21324d]" href="/profile/accounts">Accounts</x-nav-link>
         </div>
     </x-slot>
 
-
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-lg font-bold">Profile Information</h2>
-                <p><strong>Name:</strong> {{ Auth::user()->name }}</p>
-                <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                <p><strong>Balance:</strong> {{ number_format(Auth::user()->balance, 2) }}</p>
-                <p><strong>Current Currency:</strong> {{ Auth::user()->currency }}</p>
-                <p><strong>IBAN:</strong> {{ Auth::user()->iban }}</p>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <h2 class="text-xl font-semibold mb-4">Balance</h2>
-            <p class="text-2xl font-bold">{{$user->currency}} {{ number_format($user->balance, 2) }}</p>
-            <form action="{{ route('profile.updateBalance') }}" method="POST" class="mt-4">
-                @csrf
-                <div class="mb-4">
-                    <label class="block text-gray-700">Add Money:</label>
-                    <input type="number" name="balance" min="0" step="0.01" required
-                           class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           placeholder="0.00">
-                </div>
-                <button type="submit" class="dark:bg-black hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    Save
-                </button>
-            </form>
-
-        </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+        <div class="flex p-4 box-border container mx-auto flex space-x-4 text-[#233043]">
+            <div class="w-1/2 border border-gray-300 shadow-xl rounded-lg bg-white">
+                <h1 class="text-xl text-center font-bold py-6"><strong>Profile Information</strong></h1>
+                <div class="p-8 text-lg">
+                    <div><strong>Name - </strong> {{Auth::user()->name}} </div>
+                    <div><strong>Email - </strong> {{Auth::user()->email}} </div>
+                    <div><strong>Current IBAN - </strong> {{Auth::user()->iban}} </div>
+                    <div><strong>Type - </strong> something... </div>
                 </div>
             </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
+            <div class="w-1/2 border border-gray-300 shadow-xl rounded-lg bg-white">
+                <h1 class="text-xl text-center font-bold py-6"><strong>Account Balance</strong></h1>
+                <div class="p-6 text-lg text-center">
+                    <div><strong>BALANCE</strong></div>
+                    <div class="text-3xl"><strong>{{Auth::user()->currency}} {{number_format(Auth::user()->balance , 2) }}</strong></div>
+                    <form action="{{ route('profile.updateBalance') }}" method="POST" class="mt-4">
+                        @csrf
+                        <div class="mb-4 text-left">
+                            <label class="block text-gray-700">Add Money:</label>
+                            <input type="number" name="balance" min="0" step="0.01" required
+                                   class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   placeholder="0.00">
+                        </div>
+                        <x-primary-button>
+                            Save
+                        </x-primary-button>
+                    </form>
+                </div>
+            </div>
+            <div class="w-1/2 border border-gray-300 shadow-xl rounded-lg bg-white">
+                <div class="p-6 text-lg">
                     @include('profile.partials.update-password-form')
                 </div>
             </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max">
-                    @include('profile.partials.delete-user-form')
+            <div class="w-1/2 border border-gray-300 shadow-xl rounded-lg bg-white">
+                <div class="p-6 text-lg">
+                    @include('profile.partials.update-profile-information-form')
                 </div>
+            </div>
+        </div>
+        <div class="container mx-auto flex mt-8 space-x-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="max">
+                @include('profile.partials.delete-user-form')
             </div>
         </div>
     </div>

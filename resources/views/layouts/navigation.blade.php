@@ -14,7 +14,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="/home">Home</x-nav-link>
                     <x-nav-link href="/cryptos">Cryptos</x-nav-link>
-                    <x-nav-link href="/home">Something</x-nav-link>
+                    <x-nav-link href="/transfer">Transfer</x-nav-link>
                 </div>
             </div>
 

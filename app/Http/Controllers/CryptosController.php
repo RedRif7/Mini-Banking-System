@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCryptosRequest;
 use App\Http\Services\CryptoService;
 use App\Models\Crypto;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +81,28 @@ class CryptosController extends Controller
             }
         }
         return null;
+    }
+    public function showDetails(Request $request)
+    {
+        $symbol = $request->query('symbol');
+        $crypto = Crypto::where('symbol', $symbol)->first();
+
+        if ($crypto) {
+            $user = Auth::user();
+
+            $selectedCrypto = [
+                'symbol' => $crypto->symbol,
+                'price' => $crypto->price,
+            ];
+
+            return view('cryptos', [
+                'cryptos' => ['data' => Crypto::all()],
+                'selectedCrypto' => $selectedCrypto,
+                'user' => $user,
+            ]);
+        } else {
+            return redirect()->back()->with('error', 'Crypto not found');
+        }
     }
 
     /**

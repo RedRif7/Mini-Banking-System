@@ -16,20 +16,19 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 
 Route::get('/cryptos', [CryptosController::class,'index']);
 
-Route::get('/cryptos/{name}', function ($name) {
-    $crypto = CryptosController::coinBySymbol($name);
-    return view('crypto',['crypto' => $crypto]);
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/cryptos/details', [CryptosController::class, 'showDetails'])->name('cryptos.details');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/update-currency', [ProfileController::class, 'updateCurrency'])->middleware('auth')->name('profile.updateCurrency');
-    Route::post('/profile/update-balance', [ProfileController::class, 'updateBalance'])
+    Route::post('/profile/', [ProfileController::class, 'updateCurrency'])->middleware('auth')->name('profile.updateCurrency');
+    Route::post('/profile/', [ProfileController::class, 'updateBalance'])
         ->name('profile.updateBalance');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
