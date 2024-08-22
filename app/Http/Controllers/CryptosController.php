@@ -116,16 +116,24 @@ class CryptosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($symbol)
     {
-        $cryptos = Crypto::all();
-        return view('cryptos',compact('cryptos'));
+        $crypto = Crypto::where('symbol', $symbol)->first();
+
+        // Check if the crypto exists
+        if (!$crypto) {
+            return redirect()->route('cryptos')->with('error', 'Cryptocurrency not found.');
+        }
+
+        // Return the view with the selected crypto
+        return view('crypto', ['crypto' => $crypto]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cryptos $cryptos)
+    public function edit(Crypto $cryptos)
     {
         //
     }
@@ -133,7 +141,7 @@ class CryptosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCryptosRequest $request, Cryptos $cryptos)
+    public function update(UpdateCryptosRequest $request, Crypto $cryptos)
     {
         //
     }
@@ -141,7 +149,7 @@ class CryptosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cryptos $cryptos)
+    public function destroy(Crypto $cryptos)
     {
         //
     }

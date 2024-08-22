@@ -6,7 +6,7 @@
             display: none;
         }
         .scrollable-table-container {
-            max-height: 600px; /* Set a fixed height for the table container */
+            max-height: 700px; /* Set a fixed height for the table container */
             overflow-y: auto; /* Enable vertical scrolling */
 
         }
@@ -27,8 +27,7 @@
     </style>
     <section id="cryptos">
     <h2 class="text-3xl font-bold text-center mt-8 mb-4  text-[#b9c9b8]">Top Cryptocurrencies</h2>
-        <h2 class="text-3xl font-bold text-left ml-52 text-[#b9c9b8]">SEARCH</h2>
-        <div class="flex p-4 box-border container mx-auto flex space-x-4">
+        <div class="flex justify-center my-8 ">
         <div class="no-scrollbar scrollable-table-container w-1/2 border border-gray-300 shadow-xl rounded-lg">
             <table class="scrollable-table border-b-2 w-1/2 bg-[#222d3d] shadow-2xl rounded-xl">
                 <thead class="bg-blue-gray-100 border-b-2 sticky border-[#dc9a35] text-[#b9c9b8]">
@@ -48,30 +47,15 @@
                     <td class="py-3 px-4 ">{{$crypto['symbol']}}</td>
                     <td class="py-3 px-4 ">{{Auth::user()->currency }} {{number_format($crypto['price'],6)}}</td>
                     <td class="py-3 px-4 text-center">
-                        <form action="{{ route('cryptos.details') }}" method="GET">
-                            <input type="hidden" name="symbol" value="{{ $crypto['symbol'] }}">
-                            <button type="submit">Check</button>
-                        </form>
+                        <a href="{{route('crypto.show', $crypto['symbol'])}}">
+                            Check
+                        </a>
                     </td>
                 </tr>
                 </tbody>
                 @endforeach
             </table>
         </div>
-            <div class="w-1/2 bg-[#222d3d] shadow-xl rounded-lg ps-5 border border-gray-300 text-[#b9c9b8]">
-
-                @if(isset($selectedCrypto))
-                    <h2 class="text-lg font-bold mb-4 text-center p-6">Crypto Details</h2>
-                    <div id="crypto-details">
-                        <p><strong>IBAN:</strong> <span id="user-iban">{{ $user->iban }}</span></p>
-                        <p><strong>Symbol:</strong> <span id="crypto-symbol">{{ $selectedCrypto['symbol'] }}</span></p>
-                        <p><strong>Price:</strong> $<span id="crypto-price">{{ number_format($selectedCrypto['price'], 6) }}</span></p>
-                        <p><strong>Balance:</strong> $<span id="user-balance">{{ number_format($user->balance, 2) }}</span></p>
-                    </div>
-                @else
-                    <p class="text-center text-[#b9c9b8] text-2xl p-32">No crypto selected. Please click "Check" to view details.</p>
-                @endif
-            </div>
         </div>
     </section>
     <footer>

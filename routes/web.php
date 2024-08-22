@@ -21,7 +21,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/cryptos/details', [CryptosController::class, 'showDetails'])->name('cryptos.details');
+//Route::get('/cryptos/details', [CryptosController::class, 'showDetails'])->name('cryptos.details');
 
 
 Route::middleware('auth')->group(function () {
@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/', [ProfileController::class, 'updateBalance'])
         ->name('profile.updateBalance');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/crypto/{symbol}', [CryptosController::class, 'show'])->name('crypto.show');
+
 });
 
 require __DIR__.'/auth.php';
