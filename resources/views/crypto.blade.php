@@ -5,7 +5,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3><strong>{{$crypto['symbol']}}</strong></h3>
-                    <body>
+
                     <h2 class="text-3xl font-bold mt-8 mb-4 text-[#b9c9b8]">{{ $crypto->name }} ({{ $crypto->symbol }})</h2>
 
                     <div class="purchase-container border border-gray-300 shadow-xl rounded-lg p-4 bg-[#2a3b52] text-[#b9c9b8]">
@@ -29,7 +29,6 @@
                                 <input type="number" id="cash-amount" name="cash_amount" class="form-control" min="0.01" step="0.01" oninput="calculateCryptoAmount()">
                             </div>
                             <button type="submit" class="btn-primary">Buy {{ $crypto->name }}</button>
-                        </form>
                     </div>
 
                     <script>
@@ -48,7 +47,6 @@
                             calculateTotal();
                         }
                     </script>
-                    </body>
                     </html>
                 </div>
             </div>
